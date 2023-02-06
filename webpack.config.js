@@ -3,25 +3,61 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const pages = [
+  "index",
+  "test"
+];
+
 module.exports = {
+  /*
   // Входной файл
-  entry: [
-    './src/js/index.js'
-  ],
+  entry: {
+    main: "./src/js/index.js",
+    test: './src/js/test.js',
+  },
 
   // Выходной файл
   output: {
     filename: './js/bundle.js'
   },
+  */
+
+  entry: pages.reduce((config, page) => {
+    config[page] = `./src/js/${page}.js`;
+    return config;
+  }, {}),
+
+  output: {
+    filename: "js/[name].js",
+    path: path.resolve(__dirname, "dist"),
+  },
+
+  devServer: {
+    port: 5500,
+    proxy: {
+      '/websocket': {
+         target: 'ws://[address]:[port]',
+         ws: true // important
+      },
+    }
+  },
+
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
 
   // Source maps для удобства отладки
   devtool: "source-map",
 
+  /*
   // - Пользовательский порт для dev сервера
   devServer: {
     hot: true,
     port: 8008
   },
+  */
 
   module: {
     rules: [
@@ -69,8 +105,12 @@ module.exports = {
         ]
       },
     ],
+    resolve: {
+      extensions: ['.js', '.jsx']
+    },
   },
   plugins: [
+    /*
     // Подключаем файл html, стили и скрипты встроятся автоматически
     new HtmlWebpackPlugin({
       title: 'Webpack 4 Starter',
@@ -78,9 +118,19 @@ module.exports = {
       inject: true,
       minify: {
         removeComments: true,
-        collapseWhitespace: false,
+        collapseWhitespace: false
       }
     }),
+
+    new HtmlWebpackPlugin({
+      template: './src/test.html',
+      filename: 'test.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: false
+      }
+    }),
+    */
 
     // Кладем стили в отдельный файлик
     new MiniCssExtractPlugin({
@@ -94,5 +144,16 @@ module.exports = {
         to: 'img',
       },
     ])
-  ],
+  ].concat(
+    pages.map(
+      (page) => {
+        new HtmlWebpackPlugin({
+          inject: true,
+          template: `./src/${page}.html`,
+          filename: `${page}.html`,
+          chunks: [page],
+        })
+      }
+    )
+  ),
 };
