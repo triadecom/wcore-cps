@@ -17,6 +17,12 @@ module.exports = {
   // Source maps для удобства отладки
   devtool: "source-map",
 
+  // - Пользовательский порт для dev сервера
+  devServer: {
+    hot: true,
+    port: 8008
+  },
+
   module: {
     rules: [
       // Транспилируем js с babel
@@ -34,7 +40,7 @@ module.exports = {
 
       // Компилируем SCSS в CSS
       {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         use: [
           MiniCssExtractPlugin.loader, // Extract css to separate file
           'css-loader', // translates CSS into CommonJS

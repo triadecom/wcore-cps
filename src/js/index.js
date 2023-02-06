@@ -1,3 +1,5 @@
-import '../scss/style.scss'
+// import '../scss/style.scss'
 
-console.log('Works!')
+import 'normalize.css';
+
+console.log("Webpack works!");
