@@ -11,8 +11,9 @@
         "strict": "error"
     },
     "parserOptions": {
-        "ecmaVersion": 5
+        "ecmaVersion":  5
     },
+
     "overrides": [
         {
             "files": ["*.html"],
@@ -24,8 +25,7 @@
                 "@html-eslint/no-multiple-h1": "error",
                 "@html-eslint/require-img-alt": "error",
                 "@html-eslint/require-meta-viewport": "error"
-            },
-            "extends": ["plugin:@html-eslint/recommended"]
+            }
         }
     ]
 }

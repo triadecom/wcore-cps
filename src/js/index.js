@@ -1,5 +1,6 @@
-// import '../scss/style.scss'
+import '../scss/pages/index.scss';
 
-import 'normalize.css';
+
+
 
 console.log("Webpack works!");

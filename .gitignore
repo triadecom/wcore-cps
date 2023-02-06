@@ -3,3 +3,7 @@ learn
 dist
 
 node_modules
+
+build/dist
+
+build/prod

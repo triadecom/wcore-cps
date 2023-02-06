@@ -1,0 +1,24 @@
+@mixin font-face($font-family, $url, $weight) {
+    $urlItalic: $url + "Italic";    
+    @font-face {
+      font-family: "#{$font-family}";
+      src: url("../fonts/#{$pathFonts + $url}.eot") format("eot"),
+           url("../fonts/#{$url}.eot?#iefix") format("embedded-opentype"),
+           url("../fonts/#{$url}.woff") format("woff"),
+           url("../fonts/#{$url}.woff2") format("woff2"),
+           url("../fonts/#{$url}.ttf") format("truetype");
+      font-weight: #{$weight};
+      font-display: swap;
+      font-style: normal;
+    };
+    @font-face {
+        font-family: "#{$font-family}";
+        src: url("../fonts/#{$urlItalic}.eot") format("eot"),
+             url("../fonts/#{$urlItalic}.eot?#iefix") format("embedded-opentype"),
+             url("../fonts/#{$urlItalic}.woff") format("woff"),
+             url("../fonts/#{$urlItalic}.woff2") format("woff2"),
+             url("../fonts/#{$urlItalic}.ttf") format("truetype");
+        font-weight: #{$weight};
+        font-style: italic;
+    }
+}
