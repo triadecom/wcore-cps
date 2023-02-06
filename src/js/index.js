@@ -1,6 +1,4 @@
-import '../scss/style.scss';
-
-import 'normalize.css';
+import '../scss/pages/index.scss';
 
 
 
