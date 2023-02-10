@@ -1,3 +1,5 @@
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 /* Development config: */
 const webpack = require('webpack');
 
@@ -16,7 +18,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       errors: true
     }
   },
-  plugins: [],
+  plugins: [
+    new CleanWebpackPlugin()
+  ],
 });
 
 module.exports = new Promise((resolve, reject) => {
